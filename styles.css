@@ -1,0 +1,694 @@
+/* Modern Dark Fantasy & Glassmorphism Design System */
+
+:root {
+    --bg-dark: #090A10;
+    --bg-surface: rgba(18, 20, 32, 0.75);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --text-primary: #E8EBF5;
+    --text-secondary: #A0A5C0;
+    
+    /* Accent Colors */
+    --accent-gold: #F3C669;
+    --accent-gold-glow: rgba(243, 198, 105, 0.35);
+    --accent-amethyst: #9D64FE;
+    --accent-amethyst-glow: rgba(157, 100, 254, 0.4);
+    --accent-cyan: #4DEEEA;
+
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    
+    --reader-font-size: 18px;
+    --reader-line-height: 1.8;
+}
+
+/* Themes */
+body.theme-midnight {
+    --bg-dark: #090A10;
+    --bg-surface: rgba(18, 20, 32, 0.75);
+    --text-primary: #E8EBF5;
+    --text-secondary: #A0A5C0;
+}
+
+body.theme-sepia {
+    --bg-dark: #1F1B16;
+    --bg-surface: rgba(38, 33, 27, 0.85);
+    --text-primary: #F0E6D2;
+    --text-secondary: #C8B99D;
+    --border-glass: rgba(240, 230, 210, 0.15);
+}
+
+body.theme-dark {
+    --bg-dark: #050508;
+    --bg-surface: rgba(12, 12, 18, 0.85);
+    --text-primary: #D1D5DB;
+    --text-secondary: #8B949E;
+    --border-glass: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Background Canvas */
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Glassmorphic Panel Utility */
+.glass-panel {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card {
+    background: rgba(15, 17, 26, 0.82);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* App Header */
+.app-header {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 1300px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.book-title-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-shadow: 0 0 12px var(--accent-gold-glow);
+}
+
+.accent-icon {
+    color: var(--accent-gold);
+}
+
+/* Buttons */
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.icon-btn-sm {
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.pill-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--accent-amethyst);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-amethyst-glow);
+}
+
+.pill-accent {
+    background: linear-gradient(135deg, rgba(157, 100, 254, 0.25), rgba(243, 198, 105, 0.15));
+    border-color: var(--accent-amethyst);
+}
+
+.theme-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.dot {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.midnight-dot { background: #090A10; }
+.sepia-dot { background: #1F1B16; }
+.dark-dot { background: #050508; }
+
+.theme-btn.active .dot {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 8px var(--accent-gold);
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 99;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-amethyst), var(--accent-gold));
+    box-shadow: 0 0 10px var(--accent-gold-glow);
+    transition: width 0.15s ease-out;
+}
+
+/* Layout */
+.app-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 100px auto 40px;
+    padding: 0 16px;
+    gap: 24px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    height: calc(100vh - 140px);
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.collapsed {
+    margin-left: -344px;
+    opacity: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-glass);
+
+    h3 {
+        font-family: var(--font-heading);
+        font-size: 1.2rem;
+        color: var(--text-primary);
+    }
+}
+
+.chapter-count-tag {
+    font-size: 0.75rem;
+    background: rgba(243, 198, 105, 0.15);
+    color: var(--accent-gold);
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-gold);
+}
+
+.chapter-nav {
+    flex: 1;
+    overflow-y: auto;
+    margin: 16px 0;
+    padding-right: 4px;
+}
+
+.chapter-nav ul {
+    list-style: none;
+}
+
+.chapter-nav li {
+    margin-bottom: 6px;
+}
+
+.chapter-item-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chapter-item-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.chapter-item-btn.active {
+    background: linear-gradient(90deg, rgba(157, 100, 254, 0.2), rgba(243, 198, 105, 0.1));
+    border-color: rgba(157, 100, 254, 0.5);
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+.font-size-adjuster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* Reader Main Area */
+.reader-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.reader-wrapper {
+    padding: 40px;
+    min-height: 800px;
+}
+
+/* Hero Cover */
+.book-cover-banner {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 60px 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #100C1F 0%, #1A122E 50%, #090A10 100%);
+    border: 1px solid rgba(157, 100, 254, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.genre-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.hero-novel-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1.1;
+    color: #FFF;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(157, 100, 254, 0.5);
+}
+
+.hero-tagline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 28px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-amethyst), #7234E4);
+    color: #FFF;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px var(--accent-amethyst-glow);
+    transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--accent-amethyst-glow);
+}
+
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+/* Chapter Article Typography */
+.chapter-article {
+    font-family: var(--font-heading);
+    font-size: var(--reader-font-size);
+    line-height: var(--reader-line-height);
+    color: var(--text-primary);
+
+    h1 {
+        font-size: 2.4rem;
+        margin-bottom: 24px;
+        color: var(--accent-gold);
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        margin: 32px 0 16px;
+        color: var(--accent-amethyst);
+    }
+
+    p {
+        margin-bottom: 20px;
+        text-indent: 1.5em;
+    }
+
+    p:first-of-type {
+        text-indent: 0;
+    }
+
+    p:first-of-type::first-letter {
+        font-size: 3.5em;
+        float: left;
+        line-height: 0.8;
+        padding-right: 10px;
+        color: var(--accent-gold);
+        font-family: var(--font-heading);
+    }
+}
+
+/* Reader Footer */
+.reader-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-glass);
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.nav-btn:not(:disabled):hover {
+    background: rgba(157, 100, 254, 0.2);
+    border-color: var(--accent-amethyst);
+}
+
+/* Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 800px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h2 {
+        font-family: var(--font-heading);
+        color: var(--accent-gold);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.modal-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 10px;
+}
+
+.modal-tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.modal-tab-btn.active {
+    background: rgba(157, 100, 254, 0.2);
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.character-card {
+    padding: 20px;
+}
+
+.char-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.char-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.spark-avatar {
+    background: linear-gradient(135deg, #F3C669, #E69D2C);
+    color: #100C1F;
+}
+
+.void-avatar {
+    background: linear-gradient(135deg, #9D64FE, #4A2E80);
+    color: #FFF;
+}
+
+.char-role {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.char-traits {
+    margin-top: 12px;
+    list-style: none;
+    font-size: 0.88rem;
+
+    li {
+        margin-bottom: 4px;
+    }
+}
+
+.magic-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.magic-box {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-glass);
+}
+
+.starlight-box {
+    background: rgba(243, 198, 105, 0.08);
+    border-color: rgba(243, 198, 105, 0.3);
+}
+
+.shadow-box {
+    background: rgba(157, 100, 254, 0.08);
+    border-color: rgba(157, 100, 254, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+    }
+
+    .sidebar.collapsed {
+        display: none;
+    }
+
+    .book-cover-banner {
+        padding: 30px 20px;
+    }
+
+    .hero-novel-title {
+        font-size: 2rem;
+    }
+
+    .magic-comparison {
+        grid-template-columns: 1fr;
+    }
+}

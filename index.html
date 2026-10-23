@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whispers of Starlight and Shadow | Paranormal & Fantasy Romance eBook</title>
+    <meta name="description" content="Read Whispers of Starlight and Shadow - A dark fantasy romance novel about an Astral Weaver and a cursed Shadow Warden bound by fate.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-midnight">
+
+    <!-- Canvas Ambient Starfield Background -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Top Navigation Header -->
+    <header class="app-header glass-panel">
+        <div class="header-left">
+            <button id="toggle-sidebar-btn" class="icon-btn" title="Toggle Menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <div class="book-title-badge">
+                <i data-lucide="sparkles" class="accent-icon"></i>
+                <span class="book-title-text">Whispers of Starlight & Shadow</span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- Audio Ambiance Toggle -->
+            <button id="ambiance-btn" class="pill-btn" title="Toggle Ambient Soundscape">
+                <i data-lucide="volume-2"></i>
+                <span>Ambiance</span>
+            </button>
+
+            <!-- Story Bible Modal Trigger -->
+            <button id="bible-modal-btn" class="pill-btn pill-accent" title="Open Story Bible & Dossiers">
+                <i data-lucide="book-open"></i>
+                <span>Story Bible</span>
+            </button>
+
+            <!-- Theme Selector -->
+            <div class="theme-selector">
+                <button class="theme-btn active" data-theme="theme-midnight" title="Midnight Starlight Theme">
+                    <span class="dot midnight-dot"></span>
+                </button>
+                <button class="theme-btn" data-theme="theme-sepia" title="Old Parchment Theme">
+                    <span class="dot sepia-dot"></span>
+                </button>
+                <button class="theme-btn" data-theme="theme-dark" title="Obsidian Dark Theme">
+                    <span class="dot dark-dot"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar-container">
+        <div id="reading-progress" class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Main Application Layout -->
+    <div class="app-container">
+
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <h3>Table of Contents</h3>
+                <span class="chapter-count-tag">10 Chapters</span>
+            </div>
+
+            <nav class="chapter-nav">
+                <ul id="chapter-list">
+                    <!-- Populated dynamically by JS -->
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="reading-controls">
+                    <label>Font Size</label>
+                    <div class="font-size-adjuster">
+                        <button id="font-decrease" class="icon-btn-sm"><i data-lucide="minus"></i></button>
+                        <span id="font-size-val">18px</span>
+                        <button id="font-increase" class="icon-btn-sm"><i data-lucide="plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main eBook Reader Area -->
+        <main class="reader-area">
+            <div class="reader-wrapper glass-card">
+                
+                <!-- Hero Banner for Book Cover -->
+                <div class="book-cover-banner">
+                    <div class="cover-overlay"></div>
+                    <div class="cover-content">
+                        <span class="genre-tag"><i data-lucide="moon"></i> Paranormal & Fantasy Romance</span>
+                        <h1 class="hero-novel-title">Whispers of Starlight and Shadow</h1>
+                        <p class="hero-tagline">When starlight binds to darkness, fate itself surrenders to passion.</p>
+                        
+                        <div class="hero-actions">
+                            <button id="start-reading-btn" class="primary-btn">
+                                <i data-lucide="book-open"></i> Start Reading Chapter 1
+                            </button>
+                            <a href="output/Whispers_of_Starlight_and_Shadow.docx" download class="secondary-btn">
+                                <i data-lucide="download"></i> Download Manuscript (.DOCX)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter Content Reader -->
+                <article id="chapter-content" class="chapter-article">
+                    <!-- Chapter text rendered here dynamically -->
+                </article>
+
+                <!-- Chapter Navigation Footer -->
+                <footer class="reader-footer">
+                    <button id="prev-chapter-btn" class="nav-btn" disabled>
+                        <i data-lucide="chevron-left"></i> Previous Chapter
+                    </button>
+                    <span id="chapter-indicator">Chapter 1 of 10</span>
+                    <button id="next-chapter-btn" class="nav-btn">
+                        Next Chapter <i data-lucide="chevron-right"></i>
+                    </button>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Story Bible Modal -->
+    <div id="bible-modal" class="modal-backdrop hidden">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2><i data-lucide="sparkles"></i> Story Bible & Character Dossiers</h2>
+                <button id="close-modal-btn" class="icon-btn"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" data-tab="tab-characters">Characters</button>
+                <button class="modal-tab-btn" data-tab="tab-world">World & Magic</button>
+                <button class="modal-tab-btn" data-tab="tab-outline">Chapter Outline</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Tab: Characters -->
+                <div id="tab-characters" class="tab-pane active">
+                    <div class="character-grid">
+                        <div class="character-card glass-panel">
+                            <div class="char-header">
+                                <div class="char-avatar spark-avatar">L</div>
+                                <div>
+                                    <h3>Lyra Thorne</h3>
+                                    <span class="char-role">Protagonist • Astral Weaver</span>
+                                </div>
+                            </div>
+                            <p>Mortal scholar and secret Astral Weaver carrying the lineage of celestial light. Independent, stubborn, and courageous.</p>
+                            <ul class="char-traits">
+                                <li><strong>Magic:</strong> Star-weaving, radiant shields, astral blades</li>
+                                <li><strong>Tether Effect:</strong> Radiates endless cosmic warmth</li>
+                            </ul>
+                        </div>
+
+                        <div class="character-card glass-panel">
+                            <div class="char-header">
+                                <div class="char-avatar void-avatar">K</div>
+                                <div>
+                                    <h3>Lord Kaelen Vane</h3>
+                                    <span class="char-role">Co-Protagonist • Shadow Warden</span>
+                                </div>
+                            </div>
+                            <p>High Warden of Nocturne Reach. A 300-year-old Fae Commander cursed with carrying the devouring Void inside his soul.</p>
+                            <ul class="char-traits">
+                                <li><strong>Magic:</strong> Umbral siphoning, shadow-stepping, void flame</li>
+                                <li><strong>Tether Effect:</strong> Quietens the hungering Void in his heart</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: World -->
+                <div id="tab-world" class="tab-pane">
+                    <div class="world-info">
+                        <h3>Cosmology of Vaelen</h3>
+                        <p>Vaelen is split between the mortal realm of Solara and the nocturnal realm of Umbra. The Great Rupture tore open the Void Well, threatening both realms with anti-existence.</p>
+                        
+                        <div class="magic-comparison">
+                            <div class="magic-box starlight-box">
+                                <h4><i data-lucide="sun"></i> Astral Magic</h4>
+                                <p>Harvested from stars. Generates heat and radiant energy. Drains wielder's body temperature.</p>
+                            </div>
+                            <div class="magic-box shadow-box">
+                                <h4><i data-lucide="moon"></i> Umbral Magic</h4>
+                                <p>Harvested from the Void. Absorbs warmth and emotion, turning wielder's heart into ice.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Outline -->
+                <div id="tab-outline" class="tab-pane">
+                    <div id="outline-summary-list" class="outline-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
